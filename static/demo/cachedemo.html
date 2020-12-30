@@ -1,0 +1,140 @@
+<!DOCTYPE html >
+<html lang="zh">
+    <head>
+        <meta charset="utf-8" />
+        <title>三种cache的耗时数据表格</title>
+        <meta name="keywords" content="xchart,cache" />
+        <style type="text/css">
+            * { font-family:"\5fae\8f6f\96c5\9ed1","\9ED1\4F53",Simhei,arial,sans-serif; }
+        </style>
+    </head>
+    <body>
+        <div class="row">
+            <div class="span1"></div>
+            <div class="span10">
+                <div id="container1" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+                <div id="container2" style="min-width: 400px; height: 400px; margin: 0 auto; margin-top:30px;"></div>
+                    选择数据计算时间:
+                    <select class="span1 hard_value">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>50</option>
+                        <option>100</option>
+                  </select>
+            </div>
+            <div class="span1"></div>
+        </div>
+    </body>
+    <script src="//cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+    <script src="//cdn.staticfile.org/highcharts/3.0.2/highcharts.js"></script>
+    <script>
+    var a = 20,
+        b = 1,
+        ttl = 5,
+        count = 30;
+
+    var maindata = [],
+        cachedata = [],
+        timedata = [],
+        newestdata = [];
+    function build_data(){
+        maindata = [];
+        cachedata = [];
+        timedata = [];
+        newestdata = [];
+        for(i=0;i<=count;i++){
+            maindata.push((a+b)*i);
+            cachedata.push(b*i+a);
+            timedata.push((i%ttl)?(b):(b+a));
+            newestdata.push(b);
+        }
+    }
+    var opt = [];
+    function render(){
+        opt.chart.renderTo = 'container1';
+        opt.subtitle.text = '数据计算时间'+a+'ms,缓存操作时间'+b+'ms';
+        opt.yAxis.max = 500;
+        opt.series = [{
+            name: '未使用缓存',
+            data: maindata
+        }, {
+            name: '传统缓存方式',
+            data: cachedata
+        }];
+        chart1 = new Highcharts.Chart(opt);
+
+        opt.chart.renderTo = 'container2';
+        opt.xAxis.title.text = '请求发起时间';
+        opt.yAxis.max = 50;
+        opt.subtitle.text = '数据计算时间'+a+'ms,缓存操作时间'+b+'ms,缓存'+ttl+'s过期';
+        opt.series = [{
+            name: '传统缓存方式',
+            data: timedata
+        }, {
+            name: '异步缓存方式',
+            data: newestdata
+        }];
+        chart2 = new Highcharts.Chart(opt);
+    }
+    $(document).ready(function() {
+        build_data();
+        opt = {
+            chart: {
+                renderTo: '',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 35
+            },
+            title: {
+                text: '现有缓存方式的响应时间',
+                x: -20 //center
+            },
+            subtitle: {
+                text: '',
+                x: -20
+            },
+            xAxis: {
+                 title: {
+                    text: '同时并发请求数'
+                }
+            },
+            yAxis: {
+                title: {
+                    text: '页面平均响应时间'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }],
+                min: 0,
+                max: 500
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>' + this.y +'ms';
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: []
+        };
+        render();
+
+        //bind
+        $('.hard_value').on('change',function(){
+            a = $('.hard_value').val()*1;
+            build_data();
+            chart1.destroy();
+            chart2.destroy();
+            render();
+        });
+    });
+    </script>
+</html>

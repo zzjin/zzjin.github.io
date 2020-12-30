@@ -1,0 +1,18 @@
+<script type="text/javascript" src="//cdn.staticfile.org/zepto/1.1.6/zepto.min.js"></script>
+<img src="//dn-portal-files.qbox.me/sample1.jpg" />
+<script>
+var canvas = document.createElement('canvas');
+$('img').on('load',function(e){
+    var img = $(this);
+
+    var image = new Image();
+    image.crossOrigin="*";
+    image.onload=function(){
+        var context = canvas.getContext('2d');
+        canvas.width = 640;
+        canvas.height = 427;
+        context.drawImage(image, 0, 0, 640, 427);
+    };
+    image.src = img.attr('src');
+});
+</script>
