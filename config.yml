@@ -4,6 +4,9 @@ defaultContentLanguage: en
 title: ZZJIN's 杂谈屋
 theme: hermit
 
+disqusShortname: zzjins-blog
+
+
 markup:
   highlight:
     guessSyntax: true

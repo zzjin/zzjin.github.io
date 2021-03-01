@@ -6,7 +6,7 @@ url: /about
 
 <article class="post">
     <div class="about-intro">
-        <img src="/images/title.png" />
+        <img width="128" src="/images/title.png" />
         <p>Me.Fat.&gt;&&lt;3</p>
         <p>如果喜欢本Blog,需要技术支持:欢迎<a href='http://me.alipay.com/tczzjin'>捐赠</a></p>
     </div>
