@@ -2,10 +2,9 @@ baseURL: 'https://blog.zzjin.net'
 languageCode: en-us
 defaultContentLanguage: en
 title: ZZJIN's 杂谈屋
-theme: hermit
+theme: hermit-v2
 
 disqusShortname: zzjins-blog
-
 
 markup:
   highlight:
@@ -25,12 +24,12 @@ copyright: >-
 enableEmoji: true # Shorthand emojis in content files - https://gohugo.io/functions/emojify/
 permalinks:
   posts: '/:year/:month/:day/:title'
-author:
-  name: zzjin
 taxonomies:
   tag: tags
   # Categories are disabled by default.
 params:
+  author:
+    name: zzjin
   dateform: 'Jan 2, 2006'
   dateformShort: Jan 2
   dateformNum: '2006-01-02'
@@ -41,15 +40,24 @@ params:
   #   - ''
   themeColor: '#494f5c'
   homeSubtitle: 了解人生与八卦的地方
-  footerCopyright: ' &#183; <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
-  bgImg: '' # Homepage background-image URL
+  footerCopyright: ' <a href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>'
+  # bgImg: '' # Homepage background-image URL
 
   # Toggling this option needs to rebuild SCSS, requires Hugo extended version
-  justifyContent: true # Set "text-align: justify" to `.content`.
+  # justifyContent: true # Set "text-align: justify" to `.content`.
+  justifyContent: false
+  relatedPosts: false
+  code_copy_button: true
+  homeSubtitlePrinter: false
+  scrollToTop: false
+  global_mathjax: false
+  readTime: false
+  readTimeSeparator: '… ⏲ Reading Time:'
+  shareSocial: false
 
   # Social Icons
   # Check https://github.com/Track3/hermit#social-icons for more info.
-  social:
+  socialLinks:
     - name: gitlab
       url: 'https://gitlab.com/zzjin'
     - name: github
