@@ -60,8 +60,6 @@ params:
   # Social Icons
   # Check https://github.com/Track3/hermit#social-icons for more info.
   socialLinks:
-    - name: gitlab
-      url: 'https://gitlab.com/zzjin'
     - name: github
       url: 'https://github.com/zzjin'
 menu:
